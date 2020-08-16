@@ -7,6 +7,19 @@ var messageDisplay = document.querySelector("#message");
 var banner = document.querySelector("#banner");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
+var sounds =
+	{
+		correct: {
+			sound: new Howl({
+				urls: ['sounds/prism-2.mp3']
+			})
+		},
+		wrong: {
+			sound: new Howl({
+				urls: ['sounds/moon.mp3']
+			})
+		}
+	};
 
 init();
 
@@ -39,11 +52,13 @@ function setupCircles(){
 			console.log(clickedColor);
 			console.log(pickedColor);
 			if (clickedColor === pickedColor) {
+				sounds['correct'].sound.play();
 				messageDisplay.textContent = "Correct!";
 				resetButton.textContent = "Play Again?"
 				changeColors(clickedColor);		// When the answer is correct, change all circles to the correctly guessed color.
 				banner.style.background = clickedColor;
 			} else {
+				sounds['wrong'].sound.play();
 				this.style.background = "#232323";
 				messageDisplay.textContent = "Try Again"
 			}
