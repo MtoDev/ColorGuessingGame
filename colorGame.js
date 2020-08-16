@@ -18,6 +18,11 @@ var sounds =
 			sound: new Howl({
 				urls: ['sounds/moon.mp3']
 			})
+		},
+		buttons: {
+			sound: new Howl({
+			  urls: ['sounds/wipe.mp3']
+			})
 		}
 	};
 
@@ -67,7 +72,8 @@ function setupCircles(){
 }
 
 /* Generate random colors, pick a solution color, show and color the circles. */
-function reset(){
+function reset() {
+	sounds['buttons'].sound.play();
 	colors = generateRandomColors(numCircles);	
 	pickedColor = pickColor();	// pick a new random color from array. It is a string like rgb(r, g, b)
 	colorDisplay.textContent = pickedColor; // change colorDisplay to match picked color
