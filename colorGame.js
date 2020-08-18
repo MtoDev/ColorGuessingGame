@@ -7,6 +7,7 @@ var messageDisplay = document.querySelector("#message");
 var banner = document.querySelector("#banner");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
+var soundOn = true;
 var sounds =
 	{
 		correct: {
@@ -25,6 +26,18 @@ var sounds =
 			})
 		}
 	};
+
+$(function() {
+	$('#volume').on('click', function() {
+		if ($(this).hasClass('fa-volume-up')) {
+			$(this).removeClass('fa-volume-up').addClass('fa-volume-off');
+			soundOn = false;
+		} else if ($(this).hasClass('fa-volume-off')) {
+			$(this).removeClass('fa-volume-off').addClass('fa-volume-up');
+			soundOn = true;
+		}
+	});
+})
 
 init();
 
@@ -57,13 +70,15 @@ function setupCircles(){
 			console.log(clickedColor);
 			console.log(pickedColor);
 			if (clickedColor === pickedColor) {
-				sounds['correct'].sound.play();
+				if (soundOn)
+					sounds['correct'].sound.play();
 				messageDisplay.textContent = "Correct!";
 				resetButton.textContent = "Play Again?"
 				changeColors(clickedColor);		// When the answer is correct, change all circles to the correctly guessed color.
 				banner.style.background = clickedColor;
 			} else {
-				sounds['wrong'].sound.play();
+				if (soundOn)
+					sounds['wrong'].sound.play();
 				this.style.background = "#232323";
 				messageDisplay.textContent = "Try Again"
 			}
@@ -73,7 +88,8 @@ function setupCircles(){
 
 /* Generate random colors, pick a solution color, show and color the circles. */
 function reset() {
-	sounds['buttons'].sound.play();
+	if (soundOn)
+		sounds['buttons'].sound.play();
 	colors = generateRandomColors(numCircles);	
 	pickedColor = pickColor();	// pick a new random color from array. It is a string like rgb(r, g, b)
 	colorDisplay.textContent = pickedColor; // change colorDisplay to match picked color

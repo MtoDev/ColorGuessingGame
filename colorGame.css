@@ -48,20 +48,25 @@ button:hover {
 	margin-bottom: 25px;
 }
 
-#stripe {
-	background-color: white;
-	height: 50px;
-	text-align: center;
-	color: black;
-	margin-bottom: 50px;
-}
-
 #message {
 	display: inline-block;
 	width: 20%;
 	color: steelblue;
 	font-weight: 700;
 	text-transform: uppercase;
+}
+
+#volume {
+	color: steelblue;
+	cursor: pointer;
+}
+
+.stripe {
+	background-color: white;
+	height: 50px;
+	text-align: center;
+	color: black;
+	margin-bottom: 50px;
 }
 
 .circle {
@@ -80,4 +85,10 @@ button:hover {
 .selected {
 	color: white;
 	background: steelblue;
+}
+
+.icons {
+	float: right;
+	padding-top: 8px;
+	padding-right: 20px;
 }
